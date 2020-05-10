@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-fugitive'
+  Plug 'vim-airline/vim-airline'
 call plug#end()
 
 " My editor settings - General
@@ -21,7 +22,7 @@ set shiftwidth=4            " width for autoindents
 set autoindent              " indent a new line the same amount as the line just typed
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
-set cc=80                   " set an 80 column border for good coding style
+set cc=100                   " set an 80 column border for good coding style
 filetype plugin indent on   " allows auto-indenting depending on file type
 syntax on                   " syntax highlighting
 colorscheme neodark
@@ -170,22 +171,15 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " XML file type for isml files
 au BufNewFile,BufRead,BufReadPost *.isml set syntax=XML
+au BufNewFile,BufRead,BufReadPost *.isml set filetype=XML
 set foldmethod=syntax
+au FileType xml setlocal foldmethod=syntax
+
 "Not sure how to do this in neodark theme
 "set g:neodark_hide_endofbuffer=1
 
-" Forshowing the status of git branch & other details
-" returns a string <branch/XX> where XX corresponds to the git status
-" (for example "<master/ M>")
-function! CurrentGitStatus()
-    let gitoutput = systemlist('cd '.expand('%:p:h:S').' && git status --porcelain -b 2>/dev/null')
-    if len(gitoutput) > 0
-        let b:gitstatus = strpart(get(gitoutput,0,''),3) .'/'. strpart(get(gitoutput,1,' '),1,2)
-    else
-        let b:gitstatus = ''
-    endif
-endfunc
-autocmd BufEnter,BufWritePost * call CurrentGitStatus()
-" example of use in the status line:
-set stl=%f\ %(<%{b:gitstatus}>%)
-iset stl=%{FugitiveStatusline()}
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+"vim-airline settings
+let g:airline#extensions#tabline#enabled = 1
+
