@@ -7,6 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
+  Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 " My editor settings - General
