@@ -171,7 +171,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " XML file type for isml files
-au BufNewFile,BufRead,BufReadPost *.isml set syntax=XML
+"au BufNewFile,BufRead,BufReadPost *.isml set syntax=XML
 au BufNewFile,BufRead,BufReadPost *.isml set filetype=XML
 set foldmethod=syntax
 au FileType xml setlocal foldmethod=syntax
@@ -183,4 +183,6 @@ au FileType xml setlocal foldmethod=syntax
 
 "vim-airline settings
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
